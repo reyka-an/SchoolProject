@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:5025
+
+### 🔹 Создать группу (преподаватель с ID 2)
+POST {{baseUrl}}/api/groups
+Content-Type: application/json
+
+{
+  "name": "Английский A1",
+  "teacherId": 2
+}
+
+###
+
+### 🔹 Получить список всех групп
+GET {{baseUrl}}/api/groups
+
+###
+
+### 🔹 Получить одну группу по ID
+GET {{baseUrl}}/api/groups/1
+
+###
+
+### 🔹 Обновить группу
+PUT {{baseUrl}}/api/groups/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Английский A2",
+  "teacherId": 2
+}
+
+###
+
+### 🔹 Удалить группу
+DELETE {{baseUrl}}/api/groups/1

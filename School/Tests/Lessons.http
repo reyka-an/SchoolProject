@@ -1,0 +1,53 @@
+@baseUrl = http://localhost:5000
+
+### 🔹 Создать занятие
+POST {{baseUrl}}/api/lessons
+Content-Type: application/json
+
+{
+  "groupId": 1,
+  "teacherId": 2,
+  "startTime": "2025-07-08T15:00:00",
+  "endTime": "2025-07-08T16:00:00",
+  "notes": "Тема: Present Simple"
+}
+
+###
+
+### 🔹 Получить все занятия
+GET {{baseUrl}}/api/lessons
+
+###
+
+### 🔹 Получить занятия группы
+GET {{baseUrl}}/api/lessons/group/1
+
+###
+
+### 🔹 Получить занятия преподавателя
+GET {{baseUrl}}/api/lessons/teacher/2
+
+###
+
+### 🔹 Получить одно занятие по ID
+GET {{baseUrl}}/api/lessons/1
+
+###
+
+### 🔹 Обновить занятие
+PUT {{baseUrl}}/api/lessons/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "groupId": 1,
+  "teacherId": 2,
+  "startTime": "2025-07-08T15:00:00",
+  "endTime": "2025-07-08T16:00:00",
+  "notes": "Изменено: Present Continuous"
+}
+
+###
+
+### 🔹 Удалить занятие
+DELETE {{baseUrl}}/api/lessons/1

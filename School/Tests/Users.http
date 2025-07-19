@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:5025
+
+### 🔹 Создать пользователя
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "fullName": "Иван Иванов",
+  "email": "ivan@example.com",
+  "passwordHash": "123456",
+  "role": "Student"
+}
+
+###
+
+### 🔹 Получить список всех пользователей
+GET {{baseUrl}}/api/users
+
+###
+
+### 🔹 Получить пользователя по ID
+GET {{baseUrl}}/api/users/1
+
+###
+
+### 🔹 Обновить пользователя
+PUT {{baseUrl}}/api/users/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "fullName": "Иван Иванович",
+  "email": "ivan@example.com",
+  "passwordHash": "123456",
+  "role": "Teacher"
+}
+
+###
+
+### 🔹 Удалить пользователя
+DELETE {{baseUrl}}/api/users/1

@@ -1,0 +1,38 @@
+@baseUrl = http://localhost:5000
+
+### 🔹 Создать отметку о посещении
+POST {{baseUrl}}/api/attendance
+Content-Type: application/json
+
+{
+  "lessonId": 1,
+  "studentId": 3,
+  "statusId": 1,
+  "isTrial": false,
+  "comment": "Был вовремя"
+}
+
+###
+
+### 🔹 Получить отметки по занятию
+GET {{baseUrl}}/api/attendance/lesson/1
+
+###
+
+### 🔹 Обновить отметку
+PUT {{baseUrl}}/api/attendance/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "lessonId": 1,
+  "studentId": 3,
+  "statusId": 2,
+  "isTrial": true,
+  "comment": "Ученик болел"
+}
+
+###
+
+### 🔹 Удалить отметку
+DELETE {{baseUrl}}/api/attendance/1

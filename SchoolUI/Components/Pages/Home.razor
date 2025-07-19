@@ -1,0 +1,41 @@
+﻿@page "/"
+
+@inject HttpClient Http
+
+<PageTitle>Home</PageTitle>
+
+<h1>Список пользователей</h1>
+
+@if (users == null)
+{
+    <p><em>Загрузка...</em></p>
+}
+else if (users.Count == 0)
+{
+    <p><em>Нет пользователей</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var user in users)
+        {
+            <li>@user.FullName — @user.Email (@user.Role)</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<UserDto>? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<List<UserDto>>("api/users");
+    }
+
+    public class UserDto
+    {
+        public string FullName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+    }
+}

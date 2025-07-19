@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:5000
+
+### 🔹 Добавить ученика в группу
+POST {{baseUrl}}/api/studentgroups
+Content-Type: application/json
+
+{
+  "studentId": 3,
+  "groupId": 1
+}
+
+###
+
+### 🔹 Посмотреть учеников в группе
+GET {{baseUrl}}/api/studentgroups/group/1
+
+###
+
+### 🔹 Удалить ученика из группы (по ID связи)
+DELETE {{baseUrl}}/api/studentgroups/5
