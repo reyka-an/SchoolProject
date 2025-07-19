@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineSchool.Data;
+using School.Data;
 
 #nullable disable
 
@@ -17,7 +17,7 @@ namespace School.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
 
-            modelBuilder.Entity("OnlineSchool.Models.Attendance", b =>
+            modelBuilder.Entity("School.Models.Attendance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace School.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.AttendanceStatus", b =>
+            modelBuilder.Entity("School.Models.AttendanceStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace School.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Group", b =>
+            modelBuilder.Entity("School.Models.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace School.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Lesson", b =>
+            modelBuilder.Entity("School.Models.Lesson", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,13 +150,16 @@ namespace School.Migrations
                     b.ToTable("Lessons");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Student", b =>
+            modelBuilder.Entity("School.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("HadTrial")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsHidden")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("UserId")
@@ -170,7 +173,7 @@ namespace School.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.StudentGroup", b =>
+            modelBuilder.Entity("School.Models.StudentGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +197,7 @@ namespace School.Migrations
                     b.ToTable("StudentGroups");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.User", b =>
+            modelBuilder.Entity("School.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,21 +231,21 @@ namespace School.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Attendance", b =>
+            modelBuilder.Entity("School.Models.Attendance", b =>
                 {
-                    b.HasOne("OnlineSchool.Models.Lesson", "Lesson")
+                    b.HasOne("School.Models.Lesson", "Lesson")
                         .WithMany("Attendances")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineSchool.Models.AttendanceStatus", "Status")
+                    b.HasOne("School.Models.AttendanceStatus", "Status")
                         .WithMany("Attendances")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineSchool.Models.Student", "Student")
+                    b.HasOne("School.Models.Student", "Student")
                         .WithMany("Attendances")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -255,9 +258,9 @@ namespace School.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Group", b =>
+            modelBuilder.Entity("School.Models.Group", b =>
                 {
-                    b.HasOne("OnlineSchool.Models.User", "Teacher")
+                    b.HasOne("School.Models.User", "Teacher")
                         .WithMany("TeachingGroups")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -266,15 +269,15 @@ namespace School.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Lesson", b =>
+            modelBuilder.Entity("School.Models.Lesson", b =>
                 {
-                    b.HasOne("OnlineSchool.Models.Group", "Group")
+                    b.HasOne("School.Models.Group", "Group")
                         .WithMany("Lessons")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineSchool.Models.User", "Teacher")
+                    b.HasOne("School.Models.User", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -285,26 +288,26 @@ namespace School.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Student", b =>
+            modelBuilder.Entity("School.Models.Student", b =>
                 {
-                    b.HasOne("OnlineSchool.Models.User", "User")
+                    b.HasOne("School.Models.User", "User")
                         .WithOne("StudentProfile")
-                        .HasForeignKey("OnlineSchool.Models.Student", "UserId")
+                        .HasForeignKey("School.Models.Student", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.StudentGroup", b =>
+            modelBuilder.Entity("School.Models.StudentGroup", b =>
                 {
-                    b.HasOne("OnlineSchool.Models.Group", "Group")
+                    b.HasOne("School.Models.Group", "Group")
                         .WithMany("StudentGroups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineSchool.Models.Student", "Student")
+                    b.HasOne("School.Models.Student", "Student")
                         .WithMany("StudentGroups")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -315,31 +318,31 @@ namespace School.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.AttendanceStatus", b =>
+            modelBuilder.Entity("School.Models.AttendanceStatus", b =>
                 {
                     b.Navigation("Attendances");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Group", b =>
+            modelBuilder.Entity("School.Models.Group", b =>
                 {
                     b.Navigation("Lessons");
 
                     b.Navigation("StudentGroups");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Lesson", b =>
+            modelBuilder.Entity("School.Models.Lesson", b =>
                 {
                     b.Navigation("Attendances");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.Student", b =>
+            modelBuilder.Entity("School.Models.Student", b =>
                 {
                     b.Navigation("Attendances");
 
                     b.Navigation("StudentGroups");
                 });
 
-            modelBuilder.Entity("OnlineSchool.Models.User", b =>
+            modelBuilder.Entity("School.Models.User", b =>
                 {
                     b.Navigation("StudentProfile");
 

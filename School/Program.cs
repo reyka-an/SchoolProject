@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using OnlineSchool.Data;
+using School.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

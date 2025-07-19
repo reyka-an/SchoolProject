@@ -37,6 +37,7 @@ namespace School.Migrations
                     FullName = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
                     Role = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -72,7 +73,8 @@ namespace School.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    HadTrial = table.Column<bool>(type: "INTEGER", nullable: false)
+                    HadTrial = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsHidden = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,7 +152,6 @@ namespace School.Migrations
                     LessonId = table.Column<int>(type: "INTEGER", nullable: false),
                     StudentId = table.Column<int>(type: "INTEGER", nullable: false),
                     StatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsTrial = table.Column<bool>(type: "INTEGER", nullable: false),
                     Comment = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -184,7 +185,8 @@ namespace School.Migrations
                     { 1, "present", null, "Был" },
                     { 2, "sick", null, "Болел" },
                     { 3, "missed", null, "Не был" },
-                    { 4, "makeup", null, "Отработка" }
+                    { 4, "makeup", null, "Отработка" },
+                    { 5, "trial", null, "Пробное" }
                 });
 
             migrationBuilder.CreateIndex(

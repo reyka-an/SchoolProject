@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OnlineSchool.Data;
-using OnlineSchool.Models;
+using School.Data;
+using School.Models;
 
-namespace OnlineSchool.Controllers;
+namespace School.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

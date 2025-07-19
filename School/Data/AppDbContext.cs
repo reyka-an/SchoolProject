@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using OnlineSchool.Models;
+using School.Models;
 
-namespace OnlineSchool.Data;
+namespace School.Data;
 
 public class AppDbContext : DbContext
 {

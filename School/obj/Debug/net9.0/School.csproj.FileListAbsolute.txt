@@ -306,3 +306,4 @@ D:\rider\SchoolProject\School\obj\Debug\net9.0\refint\School.dll
 D:\rider\SchoolProject\School\obj\Debug\net9.0\School.pdb
 D:\rider\SchoolProject\School\obj\Debug\net9.0\School.genruntimeconfig.cache
 D:\rider\SchoolProject\School\obj\Debug\net9.0\ref\School.dll
+D:\rider\SchoolProject\School\obj\Debug\net9.0\School.sourcelink.json

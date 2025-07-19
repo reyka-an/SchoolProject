@@ -170,5 +170,6 @@ D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.csproj.AssemblyReferen
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\tzxjg6is5z-sowobu9fea.gz
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\0wz98yz2xy-b8x8f7e52z.gz
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.csproj.Up2Date
+D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.sourcelink.json
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\5y7h9fy78n-w9617gvvmv.gz
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\g2mjvimi5w-w9617gvvmv.gz

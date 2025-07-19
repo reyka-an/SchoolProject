@@ -1,4 +1,4 @@
-namespace OnlineSchool.Models;
+namespace School.Models;
 
 public class Student
 {
@@ -7,6 +7,8 @@ public class Student
     public int UserId { get; set; }
 
     public bool HadTrial { get; set; } = false;
+    
+    public bool IsHidden { get; set; } = false;
 
     // Навигация
     public User User { get; set; } = null!;

@@ -1,4 +1,4 @@
-namespace OnlineSchool.Models;
+namespace School.Models;
 
 public class Group
 {
