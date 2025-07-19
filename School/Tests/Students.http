@@ -1,0 +1,45 @@
+# School API — Students controller sample requests
+
+@baseUrl = http://localhost:5025
+
+### 📄  Получить список активных учеников
+GET {{baseUrl}}/api/students
+Accept: application/json
+
+### 📄  Получить список всех учеников (включая скрытых)
+GET {{baseUrl}}/api/students?showHidden=true
+Accept: application/json
+
+### 📄  Получить одного ученика по ID
+GET {{baseUrl}}/api/students/1
+Accept: application/json
+
+### ➕  Создать нового ученика
+POST {{baseUrl}}/api/students
+Content-Type: application/json
+
+{
+  "fullName": "Иван Непетров",
+  "email": "neivan@example.com",
+  "phoneNumber": "+3721234567",
+  "password": "Temp123!",
+  "hadTrial": false
+}
+
+### ✏️  Обновить данные ученика
+PUT {{baseUrl}}/api/students/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "fullName": "Иван Петров",
+  "email": "ivan@example.com",
+  "phoneNumber": "+3721234567",
+  "hadTrial": true,
+  "isHidden": false,
+  "createdAt": "2024-07-20T00:00:00Z",
+  "groups": []
+}
+
+### ❌  Удалить ученика
+DELETE {{baseUrl}}/api/students/1
