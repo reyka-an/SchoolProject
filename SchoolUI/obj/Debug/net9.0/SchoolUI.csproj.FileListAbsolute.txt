@@ -167,8 +167,6 @@ D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\Microsoft.Extensions.Primitives
 D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\Microsoft.JSInterop.dll
 D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\MudBlazor.dll
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.csproj.AssemblyReference.cache
-D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\tzxjg6is5z-sowobu9fea.gz
-D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\0wz98yz2xy-b8x8f7e52z.gz
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.csproj.Up2Date
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\SchoolUI.sourcelink.json
 D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\5y7h9fy78n-w9617gvvmv.gz
@@ -217,3 +215,5 @@ D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlit
 D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
 D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\School.dll
 D:\rider\SchoolProject\SchoolUI\bin\Debug\net9.0\School.pdb
+D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\tzxjg6is5z-vu9q1asft2.gz
+D:\rider\SchoolProject\SchoolUI\obj\Debug\net9.0\compressed\0wz98yz2xy-i93b8idyg2.gz

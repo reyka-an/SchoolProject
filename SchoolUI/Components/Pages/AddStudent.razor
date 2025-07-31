@@ -1,0 +1,89 @@
+@page "/students/add"
+@using System.ComponentModel.DataAnnotations
+@using MudBlazor
+@using System.Net.Http.Json
+@using School.Dto
+
+@inject HttpClient Http
+@inject NavigationManager Nav
+@inject ISnackbar Snackbar
+
+<PageTitle>Новый ученик</PageTitle>
+
+<MudPaper Class="p-6 d-flex flex-column gap-6 mx-auto" MaxWidth="500px">
+    <MudText Typo="Typo.h5">Добавить ученика</MudText>
+
+    <MudForm @ref="form" Model="model" Validation="true" @bind-IsValid="isValid">
+        <MudTextField @bind-Value="model.FullName" Label="ФИО" Required="true" Immediate="true" />
+
+        <MudTextField @bind-Value="model.Email" Label="E‑mail" Required="true" Immediate="true"
+                      Validation="@(new EmailAddressAttribute().IsValid)" />
+
+        <MudTextField @bind-Value="model.PhoneNumber" Label="Телефон" Immediate="true" />
+
+        <MudTextField @bind-Value="model.Password" Label="Пароль" InputType="InputType.Password"
+                      Required="true" Immediate="true" />
+
+        <!-- Кнопки -->
+        <div class="d-flex gap-4 mt-6">
+            <MudButton Disabled="@(!isValid)" OnClick=CreateAsync Color="Color.Primary" Variant="Variant.Filled">
+                Создать
+            </MudButton>
+            <MudButton OnClick="@(() => Nav.NavigateTo("/students"))" Variant="Variant.Outlined">
+                Отмена
+            </MudButton>
+        </div>
+    </MudForm>
+</MudPaper>
+
+@code {
+    private MudForm? form;
+    private bool isValid;
+
+    private readonly StudentCreateVm model = new();
+
+    private async Task CreateAsync()
+    {
+        await form!.Validate();
+        if (!isValid) return;
+
+        var body = new
+        {
+            hadTrial = false,
+            user = new
+            {
+                fullName = model.FullName,
+                email = model.Email,
+                phoneNumber = model.PhoneNumber,
+                passwordHash = model.Password
+            },
+            studentGroups = Array.Empty<object>()
+        };
+
+        var response = await Http.PostAsJsonAsync("api/students", body);
+        if (response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Ученик создан", Severity.Success);
+            Nav.NavigateTo("/students", forceLoad: true);
+        }
+        else
+        {
+            var msg = await response.Content.ReadAsStringAsync();
+            Snackbar.Add($"Ошибка ({response.StatusCode}): {msg}", Severity.Error);
+        }
+    }
+
+    private class StudentCreateVm
+    {
+        [Required]
+        public string FullName { get; set; } = string.Empty;
+
+        [Required, EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        public string PhoneNumber { get; set; } = string.Empty;
+
+        [Required]
+        public string Password { get; set; } = string.Empty;
+    }
+}

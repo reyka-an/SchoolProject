@@ -472,7 +472,7 @@
           }
         }
       },
-      "MudBlazor/8.9.0": {
+      "MudBlazor/8.10.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Components": "9.0.1",
@@ -1315,10 +1315,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "MudBlazor/8.9.0": {
-      "sha512": "KdjXMXiSvl6uNr+S2YDhGI1aX/TULMQejQSniMlp6QTss35NKFrJyrMAmN082HNvOObuKdnTtLpntJ7rM5Op/A==",
+    "MudBlazor/8.10.0": {
+      "sha512": "kEBD4Oq/+5ZfE1uuk280Wkocy1BHKyLDoIA7s190F9u37Gb0L3QItAItAXBa01BEJLPy2estV6pmfe+/UnLGUA==",
       "type": "package",
-      "path": "mudblazor/8.9.0",
+      "path": "mudblazor/8.10.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1336,7 +1336,7 @@
         "lib/net8.0/MudBlazor.xml",
         "lib/net9.0/MudBlazor.dll",
         "lib/net9.0/MudBlazor.xml",
-        "mudblazor.8.9.0.nupkg.sha512",
+        "mudblazor.8.10.0.nupkg.sha512",
         "mudblazor.nuspec",
         "staticwebassets/MudBlazor.min.css",
         "staticwebassets/MudBlazor.min.js"
@@ -1534,7 +1534,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "MudBlazor >= 8.9.0",
+      "MudBlazor >= 8.10.0",
       "School >= 1.0.0"
     ]
   },
@@ -1587,7 +1587,7 @@
         "dependencies": {
           "MudBlazor": {
             "target": "Package",
-            "version": "[8.9.0, )"
+            "version": "[8.10.0, )"
           }
         },
         "imports": [

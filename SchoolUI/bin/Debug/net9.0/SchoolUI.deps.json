@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "SchoolUI/1.0.0": {
         "dependencies": {
-          "MudBlazor": "8.9.0",
+          "MudBlazor": "8.10.0",
           "School": "1.0.0"
         },
         "runtime": {
@@ -310,7 +310,7 @@
           }
         }
       },
-      "MudBlazor/8.9.0": {
+      "MudBlazor/8.10.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "9.0.1",
           "Microsoft.AspNetCore.Components.Web": "9.0.1",
@@ -318,8 +318,8 @@
         },
         "runtime": {
           "lib/net9.0/MudBlazor.dll": {
-            "assemblyVersion": "8.9.0.0",
-            "fileVersion": "8.9.0.0"
+            "assemblyVersion": "8.10.0.0",
+            "fileVersion": "8.10.0.0"
           }
         }
       },
@@ -692,12 +692,12 @@
       "path": "microsoft.openapi/1.6.17",
       "hashPath": "microsoft.openapi.1.6.17.nupkg.sha512"
     },
-    "MudBlazor/8.9.0": {
+    "MudBlazor/8.10.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KdjXMXiSvl6uNr+S2YDhGI1aX/TULMQejQSniMlp6QTss35NKFrJyrMAmN082HNvOObuKdnTtLpntJ7rM5Op/A==",
-      "path": "mudblazor/8.9.0",
-      "hashPath": "mudblazor.8.9.0.nupkg.sha512"
+      "sha512": "sha512-kEBD4Oq/+5ZfE1uuk280Wkocy1BHKyLDoIA7s190F9u37Gb0L3QItAItAXBa01BEJLPy2estV6pmfe+/UnLGUA==",
+      "path": "mudblazor/8.10.0",
+      "hashPath": "mudblazor.8.10.0.nupkg.sha512"
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.1.10": {
       "type": "package",

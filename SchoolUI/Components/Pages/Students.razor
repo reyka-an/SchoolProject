@@ -1,139 +1,92 @@
 @page "/students"
-@using System.Net.Http.Json
-@using MudBlazor
-@using School.Dto
-
 @inject HttpClient Http
 @inject NavigationManager Nav
-@inject ISnackbar Snackbar
-@inject IDialogService Dialog
 
-<PageTitle>Ученики</PageTitle>
-
-<MudPaper Class="p-6 d-flex flex-column gap-4">
-    <!-- Панель действий -->
-    <div class="d-flex align-center gap-4 flex-wrap">
-        <!-- Поиск -->
-        <MudTextField @bind-Value="searchString"
-                       Placeholder="Поиск (имя, почта, телефон)"
-                       Adornment="Adornment.Start"
-                       AdornmentIcon="@Icons.Material.Filled.Search"
-                       Immediate="true"
-                       Class="w-64" />
-
-        <!-- Переключатель скрытых -->
-        <MudSwitch T="bool"
-                   Color="Color.Primary"
-                   @bind-Checked="showHidden"
-                   Label="Показывать скрытых"
-                   OnCheckedChanged="OnShowHiddenChanged" />
-        <MudSpacer />
-
-        <!-- Добавить ученика -->
-        <MudButton StartIcon="@Icons.Material.Filled.PersonAdd"
-                   Variant="Variant.Filled"
-                   Color="Color.Primary"
-                   OnClick="AddStudent">
+<MudPaper Class="p-4">
+    <div class="d-flex justify-space-between align-center mb-4">
+        <MudText Typo="Typo.h5">Список учеников</MudText>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="@(() => Nav.NavigateTo("/students/add"))">
             Добавить ученика
         </MudButton>
     </div>
 
-    <!-- Таблица -->
-    <MudTable Items="students"
-              Hover="true"
-              Filter="TableFilter"
-              Dense="true"
-              Breakpoint="Breakpoint.Sm"
-              @bind-SortLabel="sortLabel"
-              @bind-SortDirection="sortDirection"
-              SortFunc="TableSort">
+
+
+    <MudSwitch T="bool" @bind-Checked="showHidden" Color="Color.Primary" Class="mb-2">Показать скрытых</MudSwitch>
+
+    <MudTable Items="students" Hover="true">
         <HeaderContent>
-            <MudTh SortBy="FullName">ФИО</MudTh>
-            <MudTh SortBy="PhoneNumber">Телефон</MudTh>
-            <MudTh SortBy="Email">Почта</MudTh>
+            <MudTh>ФИО</MudTh>
+            <MudTh>Email</MudTh>
+            <MudTh>Телефон</MudTh>
             <MudTh>Группы</MudTh>
-            <MudTh SortBy="CreatedAt">Дата рег.</MudTh>
+            <MudTh>Пробное</MudTh>
             <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="ФИО">@context.FullName</MudTd>
-            <MudTd DataLabel="Телефон">@context.PhoneNumber</MudTd>
-            <MudTd DataLabel="Почта">@context.Email</MudTd>
-            <MudTd DataLabel="Группы">@string.Join(", ", context.Groups)</MudTd>
-            <MudTd DataLabel="Дата рег.">@context.CreatedAt.ToString("dd.MM.yyyy")</MudTd>
-            <MudTd Class="d-flex gap-2">
-                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Size="Size.Small" @onclick="() => EditStudent(context.Id)" />
-                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small" @onclick="() => ConfirmDeleteAsync(context)" />
-            </MudTd>
+            <MudTr Style="@(context.IsHidden ? "opacity: 0.5" : null)">
+                <MudTd>@context.FullName</MudTd>
+                <MudTd>@context.Email</MudTd>
+                <MudTd>@context.PhoneNumber</MudTd>
+                <MudTd>
+                    @foreach (var group in context.Groups)
+                    {
+                        <MudChip T="string" Class="me-1">@group</MudChip>
+                    }
+                </MudTd>
+                <MudTd>@(context.HadTrial ? "Да" : "Нет")</MudTd>
+                <MudTd Align="Align.Right">
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert"
+                             AriaLabel="Open user menu">
+                        <MudMenuItem OnClick="@(() => Nav.NavigateTo($"/students/edit/{context.Id}"))" Label="Редактировать"/>
+                        <MudMenuItem OnClick="() => ToggleHidden(context)" Label="Скрыть"/>
+                        <MudMenuItem Label="Удалить"/>
+                    </MudMenu>
+                </MudTd>
+            </MudTr>
         </RowTemplate>
-        <NoRecordsContent>
-            <MudText Typo="Typo.subtitle2" Class="m-4">Нет учеников</MudText>
-        </NoRecordsContent>
     </MudTable>
 </MudPaper>
 
 @code {
     private List<StudentDto> students = new();
-    private string searchString = string.Empty;
-    private bool showHidden;
+    private bool showHidden = false;
 
-    private string sortLabel = nameof(StudentDto.FullName);
-    private SortDirection sortDirection = SortDirection.None;
-
-    protected override async Task OnInitializedAsync() => await ReloadAsync();
-
-    private async Task ReloadAsync()
+    protected override async Task OnInitializedAsync()
     {
-        var url = $"api/students?showHidden={showHidden.ToString().ToLower()}";
-        students = await Http.GetFromJsonAsync<List<StudentDto>>(url) ?? new();
+        await LoadStudents();
     }
 
-    private bool TableFilter(StudentDto dto) =>
-        string.IsNullOrWhiteSpace(searchString) ||
-        dto.FullName.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-        dto.Email.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-        dto.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase);
-
-    private IOrderedEnumerable<StudentDto> TableSort(IEnumerable<StudentDto> source, string sortLabel, SortDirection dir) => sortLabel switch
+    private async Task LoadStudents()
     {
-        nameof(StudentDto.PhoneNumber) => dir == SortDirection.Descending
-            ? source.OrderByDescending(x => x.PhoneNumber)
-            : source.OrderBy(x => x.PhoneNumber),
-        nameof(StudentDto.Email) => dir == SortDirection.Descending
-            ? source.OrderByDescending(x => x.Email)
-            : source.OrderBy(x => x.Email),
-        nameof(StudentDto.CreatedAt) => dir == SortDirection.Descending
-            ? source.OrderByDescending(x => x.CreatedAt)
-            : source.OrderBy(x => x.CreatedAt),
-        _ => dir == SortDirection.Descending
-            ? source.OrderByDescending(x => x.FullName)
-            : source.OrderBy(x => x.FullName)
-    };
+        var response = await Http.GetFromJsonAsync<List<StudentDto>>($"/api/students?showHidden={showHidden.ToString().ToLower()}");
+        if (response != null)
+            students = response;
+    }
 
-    private void AddStudent() => Nav.NavigateTo("/students/add");
+    private async Task ToggleHidden(StudentDto student)
+    {
+        student.IsHidden = !student.IsHidden;
+        var result = await Http.PutAsJsonAsync($"/api/students/{student.Id}", student);
+        if (result.IsSuccessStatusCode)
+            await LoadStudents();
+    }
 
-    private void EditStudent(int id) => Nav.NavigateTo($"/students/edit/{id}");
-
-    private async Task OnShowHiddenChanged(bool value)
+    private async Task OnSwitchChanged(bool value)
     {
         showHidden = value;
-        await ReloadAsync();
+        await LoadStudents();
     }
 
-    private async Task ConfirmDeleteAsync(StudentDto dto)
+    public class StudentDto
     {
-        var confirmed = await Dialog.ShowMessageBox(
-            title: "Подтверждение",
-            markupMessage: (MarkupString)$"Удалить ученика <b>{dto.FullName}</b>?",
-            yesText: "Удалить",
-            cancelText: "Отмена",
-            options: new DialogOptions { CloseOnEscapeKey = true });
-
-        if (confirmed is true)
-        {
-            await Http.DeleteAsync($"api/students/{dto.Id}");
-            Snackbar.Add("Ученик удалён", Severity.Success);
-            await ReloadAsync();
-        }
+        public int Id { get; set; }
+        public string FullName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public bool HadTrial { get; set; }
+        public bool IsHidden { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public IEnumerable<string> Groups { get; set; } = new List<string>();
     }
 }

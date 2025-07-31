@@ -12,6 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient
 // 🔧 Подключаем Razor Components
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
 builder.Services.AddMudServices();
 
 var app = builder.Build();

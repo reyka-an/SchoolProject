@@ -1,0 +1,132 @@
+# Build results
+/[Dd]ebug/
+/[Dd]ebugPublic/
+/[Rr]elease/
+/[Rr]eleases/
+/[Pp]ublish/
+/[Oo]bj/
+/[Bb]in/
+x64/
+x86/
+arm/
+arm64/
+*[Bb]uild[Ll]og.*.xml
+*.nuget.props
+*.nuget.targets
+
+# Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio 2015+ cache/options
+.vs/
+!vs/config/applicationhost.config
+!vs/[^/]*/.gitignore
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.ipr
+*.iws
+*.iml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# MSBuild
+!**/.editorconfig
+!**/Directory.Build.props
+!**/Directory.Build.targets
+!**/Directory.Build.targets.*
+!**/Directory.Build.props.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+TEST-*.xml
+test-results.xml
+
+# Build Results
+*.Cache
+*.bak
+*.cache
+*.codeAnalysisReport.xml
+*.coverage.xml
+*.dotCover
+*.pidb
+*.prof
+*.sbr
+*.testCache
+*.testStore
+*.traceup
+*.coverage
+*.lcov
+
+# NuGet
+*.nupkg
+!*.nuspec
+packages/
+NuGetPackages/
+*.targets
+*.props
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# StyleCop
+StyleCopReport.xml
+
+# DotCover
+*.snap
+
+# Coverlet
+coverage*.json
+coverage*.xml
+
+# Cake
+tools/
+!tools/packages.config
+
+# Git
+.gitattributes
+.gitignore
+!.gitignore
+
+# Others
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# ASP.NET Core specific
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
+secrets.json
+*.pfx
+*.p12
+*.pubxml
+*.publishsettings
+
+# Docker
+.dockerignore
+Dockerfile
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.staging
+.env.production
+
+# IDEs and editors
+*.swp
+*~
