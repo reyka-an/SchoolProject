@@ -1,0 +1,55 @@
+@page "/teachers"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<MudPaper Class="p-4">
+    <div class="d-flex justify-space-between align-center mb-4">
+        <MudText Typo="Typo.h5">Список преподавателей</MudText>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="@(() => Nav.NavigateTo("/teachers/add"))">
+            Добавить преподавателя
+        </MudButton>
+    </div>
+
+    <MudTable Items="teachers" Hover="true">
+        <HeaderContent>
+            <MudTh>ФИО</MudTh>
+            <MudTh>Роль</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTr>
+                <MudTd>@context.FullName</MudTd>
+                <MudTd>@context.Role</MudTd>
+                <MudTd Align="Align.Right">
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert" AriaLabel="Открыть меню">
+                        <MudMenuItem OnClick="@(() => Nav.NavigateTo($"/teachers/edit/{context.Id}"))" Label="Редактировать" />
+                        <MudMenuItem Label="Удалить" />
+                    </MudMenu>
+                </MudTd>
+            </MudTr>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+@code {
+    private List<UserDto> teachers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTeachers();
+    }
+
+    private async Task LoadTeachers()
+    {
+        var response = await Http.GetFromJsonAsync<List<UserDto>>("/api/users");
+        if (response != null)
+            teachers = response.Where(u => u.Role == "Teacher").ToList();
+    }
+
+    public class UserDto
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
+    }
+}

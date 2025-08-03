@@ -31,6 +31,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZGRTdHVkZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/rider/SchoolProject/SchoolUI/Components/Pages/AddTeachers.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZGRUZWFjaGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/rider/SchoolProject/SchoolUI/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -41,6 +45,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/rider/SchoolProject/SchoolUI/Components/Pages/Students.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/rider/SchoolProject/SchoolUI/Components/Pages/Teachers.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUZWFjaGVycy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/rider/SchoolProject/SchoolUI/Components/Pages/Users.razor]
